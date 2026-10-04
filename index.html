@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hoạt ảnh quả cầu</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #050816;
+    }
+
+    /* Nền */
+    .scene {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at center, #172554 0%, #080d20 45%, #02030a 100%);
+    }
+
+    /* Các ngôi sao */
+    .star {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 2s infinite alternate;
+    }
+
+    .star:nth-child(1) { top: 15%; left: 20%; animation-delay: .2s; }
+    .star:nth-child(2) { top: 30%; left: 80%; animation-delay: .8s; }
+    .star:nth-child(3) { top: 70%; left: 15%; animation-delay: 1.2s; }
+    .star:nth-child(4) { top: 80%; left: 75%; animation-delay: .5s; }
+    .star:nth-child(5) { top: 20%; left: 55%; animation-delay: 1.5s; }
+    .star:nth-child(6) { top: 60%; left: 90%; animation-delay: .3s; }
+    .star:nth-child(7) { top: 85%; left: 40%; animation-delay: 1s; }
+    .star:nth-child(8) { top: 10%; left: 90%; animation-delay: .7s; }
+
+    /* Vầng sáng */
+    .glow {
+      position: absolute;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      background: rgba(59, 130, 246, .12);
+      filter: blur(50px);
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    /* Quả cầu */
+    .ball {
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle at 30% 25%,
+          #ffffff 0%,
+          #67e8f9 8%,
+          #22d3ee 25%,
+          #2563eb 55%,
+          #312e81 80%,
+          #111827 100%
+        );
+
+      box-shadow:
+        0 0 30px #22d3ee,
+        0 0 70px rgba(34, 211, 238, .7),
+        0 0 130px rgba(37, 99, 235, .4);
+
+      animation:
+        float 4s ease-in-out infinite,
+        rotate 8s linear infinite;
+    }
+
+    /* Vòng tròn bên ngoài */
+    .ring {
+      position: absolute;
+      width: 300px;
+      height: 90px;
+      border: 2px solid rgba(103, 232, 249, .7);
+      border-radius: 50%;
+      transform: rotate(-20deg);
+
+      box-shadow:
+        0 0 15px #22d3ee,
+        inset 0 0 15px rgba(34, 211, 238, .4);
+
+      animation: ring 5s linear infinite;
+    }
+
+    /* Hạt sáng bay xung quanh */
+    .particle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #67e8f9;
+      box-shadow: 0 0 12px #22d3ee;
+      animation: orbit 5s linear infinite;
+    }
+
+    .particle:nth-of-type(1) {
+      animation-delay: 0s;
+    }
+
+    .particle:nth-of-type(2) {
+      animation-delay: -1.2s;
+    }
+
+    .particle:nth-of-type(3) {
+      animation-delay: -2.5s;
+    }
+
+    .particle:nth-of-type(4) {
+      animation-delay: -3.7s;
+    }
+
+    /* Chữ */
+    .title {
+      position: absolute;
+      bottom: 12%;
+      width: 100%;
+      text-align: center;
+
+      color: white;
+      font-family: Arial, sans-serif;
+      font-size: 28px;
+      letter-spacing: 5px;
+
+      text-shadow:
+        0 0 10px #22d3ee,
+        0 0 30px #2563eb;
+
+      animation: textGlow 2s ease-in-out infinite alternate;
+    }
+
+    /* Animation */
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(-20px);
+      }
+
+      50% {
+        transform: translateY(20px);
+      }
+    }
+
+    @keyframes rotate {
+      0% {
+        filter: hue-rotate(0deg);
+      }
+
+      100% {
+        filter: hue-rotate(360deg);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(.8);
+        opacity: .5;
+      }
+
+      50% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
+    }
+
+    @keyframes ring {
+      0% {
+        transform: rotate(-20deg) scale(1);
+      }
+
+      50% {
+        transform: rotate(160deg) scale(1.15);
+      }
+
+      100% {
+        transform: rotate(340deg) scale(1);
+      }
+    }
+
+    @keyframes twinkle {
+      from {
+        opacity: .2;
+        transform: scale(.5);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1.5);
+      }
+    }
+
+    @keyframes orbit {
+      from {
+        transform:
+          rotate(0deg)
+          translateX(170px)
+          rotate(0deg);
+      }
+
+      to {
+        transform:
+          rotate(360deg)
+          translateX(170px)
+          rotate(-360deg);
+      }
+    }
+
+    @keyframes textGlow {
+      from {
+        opacity: .6;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="scene">
+
+    <!-- Ngôi sao -->
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+
+    <!-- Vầng sáng -->
+    <div class="glow"></div>
+
+    <!-- Quả cầu -->
+    <div class="ball"></div>
+
+    <!-- Vòng năng lượng -->
+    <div class="ring"></div>
+
+    <!-- Hạt năng lượng -->
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+
+    <!-- Tiêu đề -->
+    <div class="title">
+      FUTURE
+    </div>
+
+  </div>
+
+</body>
+</html>
